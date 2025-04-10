@@ -1,104 +1,66 @@
 #include "push_swap.h"
 
-void	sa(t_ring *a)
+void	swap(t_ring *ring)
 {
-	t_node	*first;
-	t_node	*second;
+	t_node	*top_node;
+	t_node	*second_node;
+	t_node	*last_node;
+	t_node	*third_node;
 
-	if (!a || a->size < 2)
+	if (!ring || ring->size < 2)
 		return ;
-	first = a->head;
-	second = a->head->next;
-	second->prev = first->prev;
-	first->prev = second;
-	first->next = second->next;
-	second->next->prev = first;
-	second->next = first;
-	a->head = second;
-}
-
-void	sb(t_ring *b)
-{
-	t_node	*first;
-	t_node	*second;
-
-	if (!b || b->size < 2)
-		return ;
-	first = b->head;
-	second = b->head->next;
-	second->prev = first->prev;
-	first->prev = second;
-	first->next = second->next;
-	second->next->prev = first;
-	second->next = first;
-	b->head = second;
+	top_node = ring->head;
+	second_node = top_node->next;
+	last_node = top_node->prev;
+	third_node = second_node->next;
+	second_node->prev = last_node;
+	last_node->next = second_node;
+	top_node->next = third_node;
+	third_node->prev = top_node;
+	top_node->prev = second_node;
+	second_node->next = top_node;
+	ring->head = second_node;
 }
 
 void	ss(t_ring *a, t_ring *b)
 {
-	sa(a);
-	sb(b);
+	swap(a);
+	swap(b);
 }
 
-void	pa(t_ring *a, t_ring *b)
+void	push(t_ring *origin, t_ring *dest)
 {
 	t_node	*node_to_push;
 
-	if (!b || b->size == 0)
+	if (!origin || origin->size == 0)
 		return ;
-	node_to_push = b->head;
-	extract_node(b, node_to_push);
-	add_front(a, node_to_push);
+	node_to_push = origin->head;
+	extract_node(origin, node_to_push);
+	add_front(dest, node_to_push);
 }
 
-void	pb(t_ring *a, t_ring *b)
+void	rotate(t_ring *ring)
 {
-	t_node	*node_to_push;
-
-	if (!a || a->size == 0)
+	if (!ring || ring->size < 2)
 		return ;
-	node_to_push = a->head;
-	extract_node(a, node_to_push);
-	add_front(b, node_to_push);
-
-}
-
-void	ra(t_ring *a)
-{
-	if (!a || a->size < 2)
-		return ;
-	a->head = a->head->next;	
-}
-
-void	rb(t_ring *b)
-{
-	if (!b || b->size < 2)
-		return ;
-	b->head = b->head->next;	
+	ring->head = ring->head->next;	
 }
 
 void	rr(t_ring *a, t_ring * b)
 {
-	ra(a);
-	rb(b);
+	rotate(a);
+	rotate(b);
 }
 
-void	rra(t_ring *a)
+void	r_rotate(t_ring *ring)
 {
-	if (!a || a->size < 2)
+	if (!ring || ring->size < 2)
 		return ;
-	a->head = a->head->prev;	
-}
-
-void	rrb(t_ring *b)
-{
-	if (!b || b->size < 2)
-		return ;
-	b->head = b->head->prev;	
+	ring->head = ring->head->prev;	
 }
 
 void	rrr(t_ring *a, t_ring *b)
 {
-	rra(a);
-	rrb(b);
+	r_rotate(a);
+	r_rotate(b);
 }

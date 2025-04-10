@@ -32,25 +32,25 @@ void execute_op(t_ring *a, t_ring *b, char *op)
     ft_printf("\nExecuting: %s\n", op);
     
     if (ft_strncmp(op, "sa", 3) == 0)
-        sa(a);
+        swap(a);
     else if (ft_strncmp(op, "sb", 3) == 0)
-        sb(b);
+        swap(b);
     else if (ft_strncmp(op, "ss", 3) == 0)
         ss(a, b);
     else if (ft_strncmp(op, "pa", 3) == 0)
-        pa(a, b);
+        push(b, a);
     else if (ft_strncmp(op, "pb", 3) == 0)
-        pb(a, b);
+        push(a, b);
     else if (ft_strncmp(op, "ra", 3) == 0)
-        ra(a);
+        rotate(a);
     else if (ft_strncmp(op, "rb", 3) == 0)
-        rb(b);
+        rotate(b);
     else if (ft_strncmp(op, "rr", 3) == 0)
         rr(a, b);
     else if (ft_strncmp(op, "rra", 4) == 0)
-        rra(a);
+        r_rotate(a);
     else if (ft_strncmp(op, "rrb", 4) == 0)
-        rrb(b);
+        r_rotate(b);
     else if (ft_strncmp(op, "rrr", 4) == 0)
         rrr(a, b);
     
@@ -161,6 +161,7 @@ int main(int argc, char **argv)
     
     if (a->size >= 1)
     {
+        execute_op(a, b, "pb");
         execute_op(a, b, "pb");
     }
     
