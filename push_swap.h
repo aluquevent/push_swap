@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 # include "libft/includes/libft.h"
 # include "libft/includes/ft_printf.h"
+# include <stdbool.h>
 // # include "libft/includes/get_next_line.h"
 
 typedef struct	s_node
@@ -42,10 +43,8 @@ int		is_sorted(t_ring *ring);
 void	swap(t_ring *ring);
 void	ss(t_ring *a, t_ring *b);
 void	push(t_ring *origin, t_ring *dest);
-void	rotate(t_ring *ring);
-void	rr(t_ring *a, t_ring *b);
-void	r_rotate(t_ring *ring);
-void	rrr(t_ring *a, t_ring *b);
+void	rotate(t_ring *ring, bool reverse);
+void	rr(t_ring *a, t_ring *b, bool reverse);
 //NOT DONE
 void	free_ring(t_ring *ring);
 t_node	*find_node(t_ring *ring, int value);

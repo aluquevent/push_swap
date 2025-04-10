@@ -39,28 +39,32 @@ void	push(t_ring *origin, t_ring *dest)
 	add_front(dest, node_to_push);
 }
 
-void	rotate(t_ring *ring)
+void	rotate(t_ring *ring, bool reverse)
 {
-	if (!ring || ring->size < 2)
-		return ;
-	ring->head = ring->head->next;	
+	if (!reverse)
+	{
+		if (!ring || ring->size < 2)
+			return ;
+		ring->head = ring->head->next;	
+	}
+	else
+	{
+		if (!ring || ring->size < 2)
+			return ;
+		ring->head = ring->head->prev;	
+	}
 }
 
-void	rr(t_ring *a, t_ring * b)
+void	rr(t_ring *a, t_ring * b, bool reverse)
 {
-	rotate(a);
-	rotate(b);
-}
-
-void	r_rotate(t_ring *ring)
-{
-	if (!ring || ring->size < 2)
-		return ;
-	ring->head = ring->head->prev;	
-}
-
-void	rrr(t_ring *a, t_ring *b)
-{
-	r_rotate(a);
-	r_rotate(b);
+	if (!reverse)
+	{
+		rotate(a, false);
+		rotate(b, false);
+	}
+	else
+	{
+		rotate(a, true);
+		rotate(b, true);
+	}
 }

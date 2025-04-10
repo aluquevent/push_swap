@@ -30,7 +30,6 @@ void print_stack(t_ring *ring, char stack_name)
 void execute_op(t_ring *a, t_ring *b, char *op)
 {
     ft_printf("\nExecuting: %s\n", op);
-    
     if (ft_strncmp(op, "sa", 3) == 0)
         swap(a);
     else if (ft_strncmp(op, "sb", 3) == 0)
@@ -42,18 +41,17 @@ void execute_op(t_ring *a, t_ring *b, char *op)
     else if (ft_strncmp(op, "pb", 3) == 0)
         push(a, b);
     else if (ft_strncmp(op, "ra", 3) == 0)
-        rotate(a);
+        rotate(a, false);
     else if (ft_strncmp(op, "rb", 3) == 0)
-        rotate(b);
+        rotate(b, false);
     else if (ft_strncmp(op, "rr", 3) == 0)
-        rr(a, b);
+        rr(a, b, false);
     else if (ft_strncmp(op, "rra", 4) == 0)
-        r_rotate(a);
+        rotate(a, true);
     else if (ft_strncmp(op, "rrb", 4) == 0)
-        r_rotate(b);
+        rotate(b, true);
     else if (ft_strncmp(op, "rrr", 4) == 0)
-        rrr(a, b);
-    
+        rr(a, b, true);
     print_stack(a, 'A');
     print_stack(b, 'B');
 }
@@ -61,9 +59,11 @@ void execute_op(t_ring *a, t_ring *b, char *op)
 // Función para validar argumentos (verifica que sean números y que no haya duplicados)
 int validate_args(int argc, char **argv)
 {
-    int i, j;
-    int num1, num2;
-    
+    int	i;
+	int	j;
+    int	num1;
+	int	num2;
+
     for (i = 1; i < argc; i++)
     {
         j = 0;
@@ -98,8 +98,8 @@ t_ring *init_stack_a(int argc, char **argv)
     a = init_ring();
     if (!a)
         return (NULL);
-    
-    for (i = 1; i < argc; i++)
+    i = 0;
+    while (i++ < argc)
     {
         new_node = create_node(ft_atoi(argv[i]));
         if (!new_node)
@@ -109,7 +109,6 @@ t_ring *init_stack_a(int argc, char **argv)
         }
         add_back(a, new_node);
     }
-    
     return (a);
 }
 
@@ -124,7 +123,6 @@ int main(int argc, char **argv)
         ft_printf("Usage: %s <numbers>\n", argv[0]);
         return (1);
     }
-    
     // Validación de argumentos
     if (!validate_args(argc, argv))
     {
@@ -150,7 +148,6 @@ int main(int argc, char **argv)
     ft_printf("Initial state:\n");
     print_stack(a, 'A');
     print_stack(b, 'B');
-    
     // Demostración de operaciones
     if (a->size >= 2)
     {
@@ -158,23 +155,19 @@ int main(int argc, char **argv)
         execute_op(a, b, "ra");
         execute_op(a, b, "rra");
     }
-    
     if (a->size >= 1)
     {
         execute_op(a, b, "pb");
         execute_op(a, b, "pb");
     }
-    
     if (b->size >= 1)
     {
         execute_op(a, b, "rb");
         execute_op(a, b, "rrb");
         execute_op(a, b, "pa");
     }
-    
     // Verificar si está ordenado
     ft_printf("\nIs stack A sorted? %s\n", is_sorted(a) ? "Yes" : "No");
-    
     // Mostrar mínimo y máximo
     if (a->size > 0)
     {
@@ -186,10 +179,8 @@ int main(int argc, char **argv)
         ft_printf("Max value in stack A: %d (position: %d)\n", 
                 max->value, get_position(a, max));
     }
-    
     // Liberar memoria
     free_ring(a);
     free_ring(b);
-    
     return (0);
 }
