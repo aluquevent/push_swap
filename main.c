@@ -99,7 +99,7 @@ t_ring *init_stack_a(int argc, char **argv)
     if (!a)
         return (NULL);
     i = 0;
-    while (i++ < argc)
+    while (++i < argc)
     {
         new_node = create_node(ft_atoi(argv[i]));
         if (!new_node)

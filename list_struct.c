@@ -102,7 +102,6 @@ int	get_position(t_ring *ring, t_node *node)
 		return (-1);
 	current = ring->head;
 	pos = 0;
-//good?	
 	while (pos < ring->size)
 	{
 		if (current == node)
@@ -179,7 +178,7 @@ y	t_node	create_node(int value);
 y	void	add_back(t_ring *ring, t_node *node);
 y	void	add_front(t_ring *ring, t_node *node);
 y	void	delete_node(t_ring *ring, t_node *node);
-	void	free_ring(t_ring *ring);
+y	void	free_ring(t_ring *ring);
 y	t_ring	*init_ring(void);
 	t_node	*find_node(t_ring *ring, int value);
 

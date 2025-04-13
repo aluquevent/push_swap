@@ -10,12 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "push_swap.h"
 
-// t_list	*create_circular_list(int *values, int size)
-// {
-// 	t_list	*head;
+// t_list	*create_circular_list(int *values, int size) { t_list	*head;
 // 	t_list	*current;
 //
 // 	head = NULL;
