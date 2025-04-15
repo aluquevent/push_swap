@@ -32,6 +32,7 @@ typedef struct s_ring
 }	t_ring;
 
 t_ring	*init_ring(void);
+t_ring	*init_ring_a(int argc, char **argv);
 t_node	*create_node(int value);
 void	add_back(t_ring *ring, t_node *node);
 void	add_front(t_ring *ring, t_node *node);
@@ -45,9 +46,9 @@ void	ss(t_ring *a, t_ring *b);
 void	push(t_ring *origin, t_ring *dest);
 void	rotate(t_ring *ring, bool reverse);
 void	rr(t_ring *a, t_ring *b, bool reverse);
-//NOT DONE
 void	free_ring(t_ring *ring);
 t_node	*find_node(t_ring *ring, int value);
 int		count_moves(t_ring *ring, t_node *node, int target_pos);
-
+void	print_stack(t_ring *ring, char stack_name);
+int		validate_args(int argc, char **argv);
 #endif

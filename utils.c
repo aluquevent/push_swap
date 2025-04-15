@@ -58,3 +58,51 @@ int	count_moves(t_ring *ring, t_node *node, int target_pos)
 		return (-backward_moves);
 }
 
+void print_stack(t_ring *ring, char stack_name)
+{
+    t_node *current;
+    int i;
+    
+    if (!ring || ring->size == 0)
+    {
+        ft_printf("Stack %c: [empty]\n", stack_name);
+        return;
+    }
+    
+    ft_printf("Stack %c: [", stack_name);
+    current = ring->head;
+    i = 0;
+    while (i < ring->size)
+    {
+        ft_printf("%d", current->value);
+        if (i < ring->size - 1)
+            ft_printf(", ");
+        current = current->next;
+        i++;
+    }
+    ft_printf("] (size: %d)\n", ring->size);
+}
+
+// Función para inicializar el stack A con los argumentos
+t_ring *init_ring_a(int argc, char **argv)
+{
+    t_ring *a;
+    t_node *new_node;
+    int i;
+    
+    a = init_ring();
+    if (!a)
+        return (NULL);
+    i = 0;
+    while (++i < argc)
+    {
+        new_node = create_node(ft_atoi(argv[i]));
+        if (!new_node)
+        {
+            free_ring(a);
+            return (NULL);
+        }
+        add_back(a, new_node);
+    }
+    return (a);
+}

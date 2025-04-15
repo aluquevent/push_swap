@@ -1,33 +1,7 @@
 #include "push_swap.h"
 
-// Función para imprimir el contenido de un stack
-void print_stack(t_ring *ring, char stack_name)
-{
-    t_node *current;
-    int i;
-    
-    if (!ring || ring->size == 0)
-    {
-        ft_printf("Stack %c: [empty]\n", stack_name);
-        return;
-    }
-    
-    ft_printf("Stack %c: [", stack_name);
-    current = ring->head;
-    i = 0;
-    while (i < ring->size)
-    {
-        ft_printf("%d", current->value);
-        if (i < ring->size - 1)
-            ft_printf(", ");
-        current = current->next;
-        i++;
-    }
-    ft_printf("] (size: %d)\n", ring->size);
-}
-
 // Función para ejecutar y mostrar una operación
-void execute_op(t_ring *a, t_ring *b, char *op)
+static void	execute_op(t_ring *a, t_ring *b, char *op)
 {
     ft_printf("\nExecuting: %s\n", op);
     if (ft_strncmp(op, "sa", 3) == 0)
@@ -56,62 +30,6 @@ void execute_op(t_ring *a, t_ring *b, char *op)
     print_stack(b, 'B');
 }
 
-// Función para validar argumentos (verifica que sean números y que no haya duplicados)
-int validate_args(int argc, char **argv)
-{
-    int	i;
-	int	j;
-    int	num1;
-	int	num2;
-
-    for (i = 1; i < argc; i++)
-    {
-        j = 0;
-        while (argv[i][j])
-        {
-            if (j == 0 && (argv[i][j] == '-' || argv[i][j] == '+'))
-                j++;
-            if (!ft_isdigit(argv[i][j]))
-                return (0);
-            j++;
-        }
-        
-        // Comprobación de duplicados
-        num1 = ft_atoi(argv[i]);
-        for (j = 1; j < i; j++)
-        {
-            num2 = ft_atoi(argv[j]);
-            if (num1 == num2)
-                return (0);
-        }
-    }
-    return (1);
-}
-
-// Función para inicializar el stack A con los argumentos
-t_ring *init_stack_a(int argc, char **argv)
-{
-    t_ring *a;
-    t_node *new_node;
-    int i;
-    
-    a = init_ring();
-    if (!a)
-        return (NULL);
-    i = 0;
-    while (++i < argc)
-    {
-        new_node = create_node(ft_atoi(argv[i]));
-        if (!new_node)
-        {
-            free_ring(a);
-            return (NULL);
-        }
-        add_back(a, new_node);
-    }
-    return (a);
-}
-
 // Función principal para demostrar las operaciones básicas
 int main(int argc, char **argv)
 {
@@ -131,7 +49,7 @@ int main(int argc, char **argv)
     }
     
     // Inicialización de stacks
-    a = init_stack_a(argc, argv);
+    a = init_ring_a(argc, argv);
     b = init_ring();
     
     if (!a || !b)
