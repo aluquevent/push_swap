@@ -2,7 +2,7 @@
 static void	sort_two(t_ring *a, t_ops *ops)
 {
 	if (a->head->value > a->head->next->value)
-		do_sa(a, &ops);
+		do_sa(a, ops);
 }
 
 static void	sort_three(t_ring *a, t_ops *ops)
@@ -15,21 +15,21 @@ static void	sort_three(t_ring *a, t_ops *ops)
 	second = a->head->next->value;
 	third = a->head->next->next->value;
 	if (first > second && second < third && first < third)
-		do_sa(a, &ops);
+		do_sa(a, ops);
 	else if (first > second && second > third)
 	{
-		do_sa(a, &ops);
-		do_ra(a , &ops);
+		do_sa(a, ops);
+		do_ra(a , ops);
 	}
 	else if (first > second && second < third && first > third)
-		do_ra(a, &ops);
+		do_ra(a, ops);
 	else if (first < second && second > third && first < third)
 	{
-		do_sa(a, &ops);
-		do_ra(a, &ops);
+		do_sa(a, ops);
+		do_ra(a, ops);
 	}
 	else if (first < second && second > third && first > third)
-		do_rra(a, &ops);
+		do_rra(a, ops);
 }
 
 static void	push_initial(t_ring *a, t_ring *b, t_ops *ops)
@@ -50,12 +50,12 @@ static void	push_initial(t_ring *a, t_ring *b, t_ops *ops)
 			if (max_pos <= a->size / 2)
 			{
 				while (a->head != max)
-					do_ra(a, &ops);
+					do_ra(a, ops);
 			}
 			else
 			{
 				while (a->head != max)
-					do_rra(a, &ops);
+					do_rra(a, ops);
 			}
 		}
 		else if (min_pos <= a->size / 2 || (a->size - min_pos) <= a->size / 2)
@@ -63,25 +63,25 @@ static void	push_initial(t_ring *a, t_ring *b, t_ops *ops)
 			if (min_pos <= a->size / 2)
 			{
 				while (a->head != min)
-					do_ra(a, &ops);
+					do_ra(a, ops);
 			}
 			else
 			{
 				while (a->head != min)
-					do_Ra(a, &ops);
+					do_rra(a, ops);
 			}
-			do_b(a, b, &ops);
+			do_pb(a, b, ops);
 		}
 		else
-			do_pb(a, b, &ops);
+			do_pb(a, b, ops);
 	}
 }
 
 int	find_target_position (t_ring *a, int value)
 {
 	t_node	*current;
-	int		min_val = INT_MIN;
-	int		max_val = INT_MAX;
+	int		min_val = INT_MAX;
+	int		max_val = INT_MIN;
 	int		min_pos;
 	int		max_pos;
 	int		i;
@@ -172,18 +172,18 @@ t_cost	find_best_move(t_ring *a, t_ring *b)
 void	execute_moves(t_ring *a, t_ring *b, t_cost cost, t_ops *ops)
 {
 	while (cost.rr--)
-		do_rr(a, b, &ops);
+		do_rr(a, b, ops);
 	while (cost.rrr--)
-		do_rrr(a, b, &ops);
+		do_rrr(a, b, ops);
 	while (cost.ra--)
-		do_ra(a, &ops);
+		do_ra(a, ops);
 	while (cost.rb--)
-		do_rb(b, &ops);
+		do_rb(b, ops);
 	while (cost.rra--)
-		do_rra(a, &ops);
+		do_rra(a, ops);
 	while (cost.rrb--)
-		do_rrb(b, &ops);
-	do_pa(b, a, &ops);
+		do_rrb(b, ops);
+	do_pa(b, a, ops);
 }
 
 void	final_rotation(t_ring *a, t_ops *ops)
@@ -196,12 +196,12 @@ void	final_rotation(t_ring *a, t_ops *ops)
 	if (min_pos <= a->size / 2)
 	{
 		while (a->head != min_node)
-			do_ra(a, &ops);
+			do_ra(a, ops);
 	}
 	else
 	{
 		while (a->head != min_node)
-			do_rra(a, &ops);
+			do_rra(a, ops);
 	}
 }
 
@@ -209,14 +209,14 @@ void	turkish_sort(t_ring *a, t_ring *b, t_ops *ops)
 {
 	t_cost	best_move;
 
-	push_initial(a, b, &ops);
-	sort_three(a, &ops);
+	push_initial(a, b, ops);
+	sort_three(a, ops);
 	while (b->size > 0)
 	{
 		best_move = find_best_move(a, b);
-		execute_moves(a, b, best_move, &ops);
+		execute_moves(a, b, best_move, ops);
 	}
-	final_rotation(a, &ops);
+	final_rotation(a, ops);
 }
 
 void	sort_stack(t_ring *a, t_ring *b)
@@ -234,6 +234,7 @@ void	sort_stack(t_ring *a, t_ring *b)
 		sort_three(a, &ops);
 	else
 		turkish_sort(a, b, &ops);
+	print_ops_summary(&ops);
 }
 
 

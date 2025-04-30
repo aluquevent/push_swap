@@ -4,7 +4,6 @@ int	main(int argc, char **argv)
 {
 	t_ring	*stack_a;
 	t_ring	*stack_b;
-	t_ops	ops;
 
 	if (argc < 2)
 	{
@@ -35,7 +34,6 @@ int	main(int argc, char **argv)
 	print_stack(stack_b, 'b');
 
 	// Sort the stack
-	ops = init_ops_counter();
 	if (is_sorted(stack_a))
 		ft_printf("Stack is already sorted\n");
 	else
@@ -47,7 +45,6 @@ int	main(int argc, char **argv)
 	print_stack(stack_b, 'b');
 
 	// Print operations summary
-	print_ops_summary(&ops);
 
 	// Free memory
 	free_ring(stack_a);
