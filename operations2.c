@@ -55,7 +55,7 @@ void	do_pb(t_ring *a, t_ring *b, t_ops *ops)
 {
 	push(a, b);
 	ft_printf("pb\n");
-	ops->pa_count++;
+	ops->pb_count++;
 	ops->total++;
 }
 

@@ -1,4 +1,3 @@
-#include "push_swap.h"
 #include "operations.h"
 static void	sort_two(t_ring *a, t_ops *ops)
 {
@@ -184,7 +183,7 @@ void	execute_moves(t_ring *a, t_ring *b, t_cost cost, t_ops *ops)
 		do_rra(a, &ops);
 	while (cost.rrb--)
 		do_rrb(b, &ops);
-	push (b, a);
+	do_pa(b, a, &ops);
 }
 
 void	final_rotation(t_ring *a, t_ops *ops)
@@ -224,6 +223,8 @@ void	sort_stack(t_ring *a, t_ring *b)
 {
 	t_ops	ops;
 
+	if (!a || !b)
+		return ;
 	ops = init_ops_counter();
 	if (is_sorted(a) || a->size <= 1)
 		return ;
