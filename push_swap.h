@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aluque-v <aluque-v@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: Xyz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 11:54:38 by aluque-v          #+#    #+#             */
-/*   Updated: 2025/04/05 13:18:01 by aluque-v         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:36:35 by Xyz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ void	rr(t_ring *a, t_ring *b, bool reverse);
 void	free_ring(t_ring *ring);
 t_node	*find_node(t_ring *ring, int value);
 void	sort_stack(t_ring *a, t_ring *b);
-void	turkish_sort(t_ring *a, t_ring *b);
+void	turkish_sort(t_ring *a, t_ring *b, t_ops *ops);
 
 int		find_target_position(t_ring *a, int value);
 t_cost	calculate_cost(t_ring *a, t_ring *b, int pos_b);
 t_cost	find_best_move(t_ring *a, t_ring *b);
-void	execute_moves(t_ring *a, t_ring *b, t_cost cost);
-void	final_rotation(t_ring *a);
+void	execute_moves(t_ring *a, t_ring *b, t_cost cost, t_ops *ops);
+void	final_rotation(t_ring *a, t_ops *ops);
 void	print_stack(t_ring *ring, char stack_name);
 int		validate_args(int argc, char **argv);
 #endif

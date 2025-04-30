@@ -1,12 +1,12 @@
 #include "push_swap.h"
-
-static void	sort_two(t_ring *a)
+#include "operations.h"
+static void	sort_two(t_ring *a, t_ops *ops)
 {
 	if (a->head->value > a->head->next->value)
-		swap(a);
+		do_sa(a, &ops);
 }
 
-static void	sort_three(t_ring *a)
+static void	sort_three(t_ring *a, t_ops *ops)
 {
 	int	first;
 	int	second;
@@ -16,24 +16,24 @@ static void	sort_three(t_ring *a)
 	second = a->head->next->value;
 	third = a->head->next->next->value;
 	if (first > second && second < third && first < third)
-		swap(a);
+		do_sa(a, &ops);
 	else if (first > second && second > third)
 	{
-		swap(a);
-		rotate(a , true);
+		do_sa(a, &ops);
+		do_ra(a , &ops);
 	}
 	else if (first > second && second < third && first > third)
-		rotate(a, false);
+		do_ra(a, &ops);
 	else if (first < second && second > third && first < third)
 	{
-		swap(a);
-		rotate(a, false);
+		do_sa(a, &ops);
+		do_ra(a, &ops);
 	}
 	else if (first < second && second > third && first > third)
-		rotate(a, true);
+		do_rra(a, &ops);
 }
 
-static void	push_initial(t_ring *a, t_ring *b)
+static void	push_initial(t_ring *a, t_ring *b, t_ops *ops)
 {
 	t_node	*max;
 	t_node	*min;
@@ -51,12 +51,12 @@ static void	push_initial(t_ring *a, t_ring *b)
 			if (max_pos <= a->size / 2)
 			{
 				while (a->head != max)
-					rotate(a, false);
+					do_ra(a, &ops);
 			}
 			else
 			{
 				while (a->head != max)
-					rotate(a, true);
+					do_rra(a, &ops);
 			}
 		}
 		else if (min_pos <= a->size / 2 || (a->size - min_pos) <= a->size / 2)
@@ -64,25 +64,25 @@ static void	push_initial(t_ring *a, t_ring *b)
 			if (min_pos <= a->size / 2)
 			{
 				while (a->head != min)
-					rotate(a, false);
+					do_ra(a, &ops);
 			}
 			else
 			{
 				while (a->head != min)
-					rotate(a, true);
+					do_Ra(a, &ops);
 			}
-			push(a, b);
+			do_b(a, b, &ops);
 		}
 		else
-			push(a, b);
+			do_pb(a, b, &ops);
 	}
 }
 
 int	find_target_position (t_ring *a, int value)
 {
 	t_node	*current;
-	int		min_val;
-	int		max_val;
+	int		min_val = INT_MIN;
+	int		max_val = INT_MAX;
 	int		min_pos;
 	int		max_pos;
 	int		i;
@@ -133,6 +133,7 @@ t_cost	calculate_cost(t_ring *a, t_ring *b, int pos_b)
 	while (i < pos_b)
 	{
 		current = current->next;
+		i++;
 	}
 	target_pos = find_target_position(a, current->value);
 	cost.ra = target_pos;
@@ -169,24 +170,24 @@ t_cost	find_best_move(t_ring *a, t_ring *b)
 	return (min_cost);
 }
 
-void	execute_moves(t_ring *a, t_ring *b, t_cost cost)
+void	execute_moves(t_ring *a, t_ring *b, t_cost cost, t_ops *ops)
 {
 	while (cost.rr--)
-		rr(a, b, false);
+		do_rr(a, b, &ops);
 	while (cost.rrr--)
-		rr(a, b, true);
+		do_rrr(a, b, &ops);
 	while (cost.ra--)
-		rotate(a, false);
+		do_ra(a, &ops);
 	while (cost.rb--)
-		rotate(b, false);
+		do_rb(b, &ops);
 	while (cost.rra--)
-		rotate(a, true);
+		do_rra(a, &ops);
 	while (cost.rrb--)
-		rotate(b, true);
+		do_rrb(b, &ops);
 	push (b, a);
 }
 
-void	final_rotation(t_ring *a)
+void	final_rotation(t_ring *a, t_ops *ops)
 {
 	t_node	*min_node;
 	int		min_pos;
@@ -196,39 +197,42 @@ void	final_rotation(t_ring *a)
 	if (min_pos <= a->size / 2)
 	{
 		while (a->head != min_node)
-			rotate(a, false);
+			do_ra(a, &ops);
 	}
 	else
 	{
 		while (a->head != min_node)
-			rotate(a, true);
+			do_rra(a, &ops);
 	}
 }
 
-void	turkish_sort(t_ring *a, t_ring *b)
+void	turkish_sort(t_ring *a, t_ring *b, t_ops *ops)
 {
 	t_cost	best_move;
 
-	push_initial(a, b);
-	sort_three(a);
+	push_initial(a, b, &ops);
+	sort_three(a, &ops);
 	while (b->size > 0)
 	{
 		best_move = find_best_move(a, b);
-		execute_moves(a, b, best_move);
+		execute_moves(a, b, best_move, &ops);
 	}
-	final_rotation(a);
+	final_rotation(a, &ops);
 }
 
 void	sort_stack(t_ring *a, t_ring *b)
 {
+	t_ops	ops;
+
+	ops = init_ops_counter();
 	if (is_sorted(a) || a->size <= 1)
 		return ;
 	else if (a->size == 2)
-		sort_two(a);
+		sort_two(a, &ops);
 	else if (a->size == 3)
-		sort_three(a);
+		sort_three(a, &ops);
 	else
-		turkish_sort(a, b);
+		turkish_sort(a, b, &ops);
 }
 
 
