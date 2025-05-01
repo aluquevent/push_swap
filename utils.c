@@ -39,25 +39,6 @@ t_node	*find_node(t_ring *ring, int value)
 	return (NULL);
 }
 
-// int	count_moves(t_ring *ring, t_node *node, int target_pos)
-// {
-// 	int	current_pos;
-// 	int	forward_moves;
-// 	int	backward_moves;
-//
-// 	if (!ring || !node || ring->size < 2)
-// 		return (0);
-// 	current_pos = get_position(ring, node);
-// 	if (current_pos == -1)
-// 		return (-1);
-// 	forward_moves = (target_pos - current_pos + ring->size) % ring->size;
-// 	backward_moves = (current_pos - target_pos + ring->size) % ring->size;
-// 	if (forward_moves < backward_moves)
-// 		return (forward_moves);
-// 	else
-// 		return (-backward_moves);
-// }
-//
 void print_stack(t_ring *ring, char stack_name)
 {
     t_node *current;

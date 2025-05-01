@@ -172,36 +172,3 @@ int	is_sorted(t_ring *ring)
 	}
 	return (1);
 }
-/*
- * CIRCULAR MANAGEMENT
-y	t_node	create_node(int value);
-y	void	add_back(t_ring *ring, t_node *node);
-y	void	add_front(t_ring *ring, t_node *node);
-y	void	delete_node(t_ring *ring, t_node *node);
-y	void	free_ring(t_ring *ring);
-y	t_ring	*init_ring(void);
-	t_node	*find_node(t_ring *ring, int value);
-
-	OPERATIONS
-	void	sa(t_ring *a);
-	void	sb(t_ring *b);
-	void	ss(t_ring *a, t_ring *b);
-	void	pa(t_ring *a, t_ring *b);
-	void	pb(t_ring *a, t_ring *b);
-	void	ra(t_ring *a);
-	void	rb(t_ring *b);
-	void	rr(t_ring *a, t_ring *b);
-	void	rra(t_ring *a);
-	void	rrb(t_ring *b);
-	void	rrr(t_ring *a, t_ring *b);
-
-	UTILS
-y	t_node	*get_max(t_ring *ring);
-y	t_node	*get_min(t_ring *ring);
-y	int		is_sorted(t_ring *ring);
-y	int		get_position(t_ring *ring, t_node *node);
-	int		count_moves(t_ring *ring, t_node *node, int target_pos);
-	
-	DEBUGGING
-	void	print_ring(t_ring *ring);
-*/
