@@ -1,21 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_struct.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aluque-v <aluque-v@student.42barcelona.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/02 13:59:40 by aluque-v          #+#    #+#             */
+/*   Updated: 2025/05/03 16:42:13 by aluque-v         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_ring	*init_ring(void)
 {
-		t_ring	*ring;
-		
-		ring = (t_ring *)malloc(sizeof(t_ring));
-		if (!ring)
-			return (NULL);
-		ring->head = NULL;
-		ring->size = 0;
-		return (ring);
+	t_ring	*ring;
+
+	ring = (t_ring *)malloc(sizeof(t_ring));
+	if (!ring)
+		return (NULL);
+	ring->head = NULL;
+	ring->size = 0;
+	return (ring);
 }
 
 t_node	*create_node(int value)
 {
 	t_node	*new;
-	
+
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
 		return (NULL);
@@ -55,7 +67,7 @@ void	add_front(t_ring *ring, t_node *node)
 {
 	t_node	*last_node;
 
-	if(!ring || !node)
+	if (!ring || !node)
 		return ;
 	if (ring->size == 0)
 	{
@@ -91,84 +103,4 @@ void	extract_node(t_ring *ring, t_node *node)
 			ring->head = node->next;
 	}
 	ring->size--;
-}
-
-int	get_position(t_ring *ring, t_node *node)
-{
-	t_node	*current;
-	size_t	pos;
-
-	if (!ring || !node || ring->size == 0)
-		return (-1);
-	current = ring->head;
-	pos = 0;
-	while (pos < ring->size)
-	{
-		if (current == node)
-			return (pos);
-		current = current->next;
-		pos++;
-	}
-	return (-1);
-}
-
-t_node	*get_max(t_ring *ring)
-{
-	t_node	*max;
-	t_node	*current;
-	int		pos;
-
-	if (!ring || ring->size == 0)
-		return (NULL);
-	max = ring->head;
-	current = ring->head;
-	pos = 0;
-	while (pos < ring->size)
-	{
-		if (max->value < current->value)
-			max = current;
-		current = current->next;
-		pos++;
-	}
-	return (max);
-}
-
-t_node	*get_min(t_ring *ring)
-{
-	t_node	*min;
-	t_node	*current;
-	int		pos;
-
-	if (!ring || ring->size == 0)
-		return (NULL);
-	min = ring->head;
-	current = ring->head;
-	pos = 0;
-	while (pos < ring->size)
-	{
-		if (min->value > current->value)
-			min = current;
-		current = current->next;
-		pos++;
-	}
-	return (min);
-}
-
-int	is_sorted(t_ring *ring)
-{
-	int		pos;
-	t_node	*current;
-	
-	if (!ring || ring->size < 2)
-		return (0);
-	pos = 0;
-	current = ring->head;
-	while (pos < ring->size - 1)
-	{
-		if (current->value > current->next->value)
-			return (0);
-		current = current->next;
-		pos++;
-	}
-	return (1);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations_core.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aluque-v <aluque-v@student.42barcelona.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/03 16:32:23 by aluque-v          #+#    #+#             */
+/*   Updated: 2025/05/03 16:43:04 by aluque-v         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	swap(t_ring *ring)
@@ -45,17 +57,17 @@ void	rotate(t_ring *ring, bool reverse)
 	{
 		if (!ring || ring->size < 2)
 			return ;
-		ring->head = ring->head->next;	
+		ring->head = ring->head->next;
 	}
 	else
 	{
 		if (!ring || ring->size < 2)
 			return ;
-		ring->head = ring->head->prev;	
+		ring->head = ring->head->prev;
 	}
 }
 
-void	rr(t_ring *a, t_ring * b, bool reverse)
+void	rr(t_ring *a, t_ring *b, bool reverse)
 {
 	if (!reverse)
 	{
