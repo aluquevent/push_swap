@@ -6,7 +6,7 @@
 /*   By: aluque-v <aluque-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:32:53 by aluque-v          #+#    #+#             */
-/*   Updated: 2025/05/03 16:44:54 by aluque-v         ###   ########.fr       */
+/*   Updated: 2025/05/04 19:43:54 by aluque-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	sort_three(t_ring *a)
 
 void	sort_stack(t_ring *a, t_ring *b)
 {
-	t_ops	ops;
-
 	if (!a || !b)
 		return ;
 	init_ops_counter();

@@ -6,7 +6,7 @@
 /*   By: aluque-v <aluque-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:32:43 by aluque-v          #+#    #+#             */
-/*   Updated: 2025/05/03 16:46:04 by aluque-v         ###   ########.fr       */
+/*   Updated: 2025/05/04 19:43:55 by aluque-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	print_stack(t_ring *ring, char stack_name)
 {
 	t_node	*current;
-	int		i;
+	size_t	i;
 
 	if (!ring || ring->size == 0)
 	{

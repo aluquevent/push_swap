@@ -6,7 +6,7 @@
 /*   By: aluque-v <aluque-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:31:48 by aluque-v          #+#    #+#             */
-/*   Updated: 2025/05/03 16:39:07 by aluque-v         ###   ########.fr       */
+/*   Updated: 2025/05/04 19:44:44 by aluque-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ static void	calculate_combined_rotations(t_cost *cost)
 	}
 }
 
-t_cost	calculate_cost(t_ring *a, t_ring *b, int pos_b)
+t_cost	calculate_cost(t_ring *a, t_ring *b, size_t pos_b)
 {
 	t_cost	cost;
 	t_node	*current;
-	int		target_pos;
-	int		i;
+	size_t	target_pos;
+	size_t	i;
 
 	init_cost(&cost);
 	current = b->head;
@@ -61,7 +61,7 @@ t_cost	calculate_cost(t_ring *a, t_ring *b, int pos_b)
 		current = current->next;
 		i++;
 	}
-	target_pos = find_target_position(a, current->value);
+	target_pos = (size_t)find_target_position(a, current->value);
 	cost.value = current->value;
 	if (target_pos <= a->size / 2)
 		cost.ra = target_pos;

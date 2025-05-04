@@ -6,7 +6,7 @@
 /*   By: aluque-v <aluque-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:32:38 by aluque-v          #+#    #+#             */
-/*   Updated: 2025/05/03 16:44:35 by aluque-v         ###   ########.fr       */
+/*   Updated: 2025/05/04 19:43:54 by aluque-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	is_in_upper_half(t_ring *a, int value)
 
 static int	find_best_push_pos(t_ring *a)
 {
-	int		i;
+	size_t	i;
 	int		best_pos;
 	int		min_cost;
 	t_node	*current;

@@ -6,7 +6,7 @@
 /*   By: aluque-v <aluque-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:32:36 by aluque-v          #+#    #+#             */
-/*   Updated: 2025/05/03 16:43:41 by aluque-v         ###   ########.fr       */
+/*   Updated: 2025/05/04 19:49:23 by aluque-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ int	find_target_position(t_ring *a, int value)
 {
 	t_node	*current;
 	t_node	*min_node;
-	int		target_pos;
-	int		i;
+	size_t	i;
 	int		closest_larger_value;
 	int		closest_larger_pos;
 
@@ -46,7 +45,7 @@ int	find_target_position(t_ring *a, int value)
 void	final_rotation(t_ring *a)
 {
 	t_node	*min_node;
-	int		min_pos;
+	size_t	min_pos;
 
 	min_node = get_min(a);
 	min_pos = get_position(a, min_node);

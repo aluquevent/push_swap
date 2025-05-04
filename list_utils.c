@@ -6,13 +6,13 @@
 /*   By: aluque-v <aluque-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:32:20 by aluque-v          #+#    #+#             */
-/*   Updated: 2025/05/03 16:42:57 by aluque-v         ###   ########.fr       */
+/*   Updated: 2025/05/04 19:50:08 by aluque-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_position(t_ring *ring, t_node *node)
+size_t	get_position(t_ring *ring, t_node *node)
 {
 	t_node	*current;
 	size_t	pos;
@@ -35,7 +35,7 @@ t_node	*get_max(t_ring *ring)
 {
 	t_node	*max;
 	t_node	*current;
-	int		pos;
+	size_t	pos;
 
 	if (!ring || ring->size == 0)
 		return (NULL);
@@ -56,7 +56,7 @@ t_node	*get_min(t_ring *ring)
 {
 	t_node	*min;
 	t_node	*current;
-	int		pos;
+	size_t	pos;
 
 	if (!ring || ring->size == 0)
 		return (NULL);
@@ -75,7 +75,7 @@ t_node	*get_min(t_ring *ring)
 
 int	is_sorted(t_ring *ring)
 {
-	int		pos;
+	size_t	pos;
 	t_node	*current;
 
 	if (!ring || ring->size < 2)

@@ -6,7 +6,7 @@
 /*   By: aluque-v <aluque-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:31:41 by aluque-v          #+#    #+#             */
-/*   Updated: 2025/05/03 16:38:12 by aluque-v         ###   ########.fr       */
+/*   Updated: 2025/05/04 19:38:07 by aluque-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_cost	find_best_move(t_ring *a, t_ring *b)
 {
 	t_cost	min_cost;
 	t_cost	current_cost;
-	int		i;
+	size_t	i;
 
 	min_cost.total = INT_MAX;
 	min_cost.ra = 0;
