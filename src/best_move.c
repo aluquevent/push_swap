@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operations.h"
+#include "../includes/operations.h"
 
 t_cost	find_best_move(t_ring *a, t_ring *b)
 {
@@ -96,6 +96,5 @@ void	execute_moves(t_ring *a, t_ring *b, t_cost cost)
 	execute_combined_moves(a, b, &cost);
 	execute_a_moves(a, &cost);
 	execute_b_moves(b, &cost);
-	// Finally, push from B to A
 	do_pa(b, a);
 }

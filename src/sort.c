@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operations.h"
+#include "../includes/operations.h"
 
 void	sort_two(t_ring *a)
 {
@@ -58,5 +58,4 @@ void	sort_stack(t_ring *a, t_ring *b)
 		sort_three(a);
 	else
 		turkish_sort(a, b);
-	print_ops_summary();
 }

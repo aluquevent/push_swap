@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operations.h"
+#include "../includes/operations.h"
 
 t_ops	g_ops;
 

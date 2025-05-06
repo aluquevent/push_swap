@@ -12,8 +12,8 @@
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# include "libft/includes/ft_printf.h"
-# include "libft/includes/libft.h"
+# include "../libft/includes/ft_printf.h"
+# include "../libft/includes/libft.h"
 # include <limits.h>
 # include <stdbool.h>
 // # include "libft/includes/get_next_line.h"
@@ -47,15 +47,15 @@ typedef struct s_cost
 typedef struct s_ops	t_ops;
 
 t_ring					*init_ring(void);
-t_ring					*init_ring_a(int argc, char **argv);
+t_ring					*init_ring_a(int *nums, size_t elements);
 t_node					*create_node(int value);
-int						validate_args(int argc, char **argv);
+int						*validate_args(int argc, char **argv, size_t *elements);
 void					add_back(t_ring *ring, t_node *node);
 void					add_front(t_ring *ring, t_node *node);
 t_node					*get_max(t_ring *ring);
 t_node					*get_min(t_ring *ring);
 void					extract_node(t_ring *ring, t_node *node);
-size_t					get_position(t_ring *ring, t_node *node);
+int						get_position(t_ring *ring, t_node *node);
 int						is_sorted(t_ring *ring);
 void					swap(t_ring *ring);
 void					ss(t_ring *a, t_ring *b);
@@ -75,6 +75,5 @@ t_node					*find_node(t_ring *ring, int value);
 t_cost					find_best_move(t_ring *a, t_ring *b);
 int						find_target_position(t_ring *a, int value);
 t_cost					calculate_cost(t_ring *a, t_ring *b, size_t pos_b);
-void					print_stack(t_ring *ring, char stack_name);
 void					free_ring(t_ring *ring);
 #endif

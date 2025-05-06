@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operations.h"
+#include "../includes/operations.h"
 
 void	do_ra(t_ring *a)
 {

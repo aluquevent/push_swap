@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operations.h"
+#include "../includes/operations.h"
 
 // Esta función determina si un número es de la mitad superior o inferior del rango
 static int	is_in_upper_half(t_ring *a, int value)

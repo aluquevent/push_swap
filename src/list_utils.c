@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
-size_t	get_position(t_ring *ring, t_node *node)
+int	get_position(t_ring *ring, t_node *node)
 {
 	t_node	*current;
 	size_t	pos;
