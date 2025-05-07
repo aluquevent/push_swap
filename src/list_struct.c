@@ -12,18 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-t_ring	*init_ring(void)
-{
-	t_ring	*ring;
-
-	ring = (t_ring *)malloc(sizeof(t_ring));
-	if (!ring)
-		return (NULL);
-	ring->head = NULL;
-	ring->size = 0;
-	return (ring);
-}
-
 t_node	*create_node(int value)
 {
 	t_node	*new;

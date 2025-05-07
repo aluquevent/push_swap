@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/operations.h"
+#include "../includes/push_swap.h"
 
 t_cost	find_best_move(t_ring *a, t_ring *b)
 {

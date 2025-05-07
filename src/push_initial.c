@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/operations.h"
+#include "../includes/push_swap.h"
 
-// Esta función determina si un número es de la mitad superior o inferior del rango
+// Esta función determina si un número 
+// es de la mitad superior o inferior del rango
 static int	is_in_upper_half(t_ring *a, int value)
 {
 	t_node	*min_node;

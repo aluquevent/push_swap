@@ -10,25 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/operations.h"
+#include "../includes/push_swap.h"
 
 t_ops	g_ops;
-
-void	init_ops_counter(void)
-{
-	g_ops.sa = 0;
-	g_ops.sb = 0;
-	g_ops.ss = 0;
-	g_ops.pa = 0;
-	g_ops.pb = 0;
-	g_ops.ra = 0;
-	g_ops.rb = 0;
-	g_ops.rr = 0;
-	g_ops.rra = 0;
-	g_ops.rrb = 0;
-	g_ops.rrr = 0;
-	g_ops.total = 0;
-}
 
 void	print_ops_summary(void)
 {

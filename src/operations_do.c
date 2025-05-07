@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/operations.h"
+#include "../includes/push_swap.h"
 
 void	do_sa(t_ring *a)
 {

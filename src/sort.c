@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/operations.h"
+#include "../includes/push_swap.h"
 
 void	sort_two(t_ring *a)
 {

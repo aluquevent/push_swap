@@ -11,9 +11,10 @@ SRC_FILES =	best_move.c		cost.c \
 			list_utils.c	operations_core.c \
 			operations_do.c	operations_do_rotate.c \
 			ops_counter.c	position_utils.c \
-			push_initial.c	push_swap.c \
+			push_initial.c	main.c \
 			small_sort.c	sort.c \
-			turkish_sort.c	validation.c
+			turkish_sort.c	validation.c \
+			init.c			validation_utils.c
 
 # Add complete route
 SRC_WITH_PATH = $(addprefix $(SRC_DIR)/,$(SRC_FILES))
@@ -24,7 +25,8 @@ OBJ_FILES = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_WITH_PATH))
 #Dependencias
 DEP_FILES = $(OBJ_FILES:.o=.d)
 
-HEADERS = includes/operations.h includes/push_swap.h
+HEADERS =	includes/operations.h	includes/push_swap.h \
+			includes/list.h			includes/sorting.h
 
 #Executable name
 EXEC = push_swap
@@ -44,7 +46,7 @@ libft_make:
 #Compile exec
 $(EXEC): $(OBJ_FILES) $(LIBFT)
 	@echo "❗ Creating executable file..."
-	@$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT_DIR) -lft
+	@$(CC) $(CFLAGS) -g -o $@ $^ -L$(LIBFT_DIR) -lft
 
 #Compile .c to .o
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) Makefile

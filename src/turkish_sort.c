@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/operations.h"
+#include "../includes/push_swap.h"
 
 static void	prepare_stacks(t_ring *a, t_ring *b)
 {
@@ -43,7 +43,3 @@ void	turkish_sort(t_ring *a, t_ring *b)
 	optimize_return(a, b);
 	final_rotation(a);
 }
-
-
-
-

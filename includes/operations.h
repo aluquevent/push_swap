@@ -10,7 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef OPERATIONS_H
+# define OPERATIONS_H
+
+# include "list.h"
+# include <limits.h>
+# include <stdbool.h>
+
+typedef struct s_cost
+{
+	int					ra;
+	int					rb;
+	int					rr;
+	int					rra;
+	int					rrb;
+	int					rrr;
+	int					total;
+	int					value;
+} t_cost;
 
 typedef struct s_ops
 {
@@ -26,11 +43,18 @@ typedef struct s_ops
 	int			rrb;
 	int			rrr;
 	int			total;
-}				t_ops;
+} t_ops;
 
 extern t_ops	g_ops;
 
-void			init_ops_counter(void);
+// Basic operations
+void			swap(t_ring *ring);
+void			ss(t_ring *a, t_ring *b);
+void			push(t_ring *origin, t_ring *dest);
+void			rotate(t_ring *ring, bool reverse);
+void			rr(t_ring *a, t_ring *b, bool reverse);
+
+// Operations with output
 void			do_sa(t_ring *a);
 void			do_sb(t_ring *b);
 void			do_ss(t_ring *a, t_ring *b);
@@ -42,4 +66,13 @@ void			do_rr(t_ring *a, t_ring *b);
 void			do_rra(t_ring *a);
 void			do_rrb(t_ring *b);
 void			do_rrr(t_ring *a, t_ring *b);
+
+// Cost functions
+void			init_cost(t_cost *cost);
+void			init_ops_counter(void);
 void			print_ops_summary(void);
+t_cost			calculate_cost(t_ring *a, t_ring *b, size_t pos_b);
+t_cost			find_best_move(t_ring *a, t_ring *b);
+void			execute_moves(t_ring *a, t_ring *b, t_cost cost);
+
+#endif

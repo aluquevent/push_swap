@@ -10,19 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/operations.h"
-
-void	init_cost(t_cost *cost)
-{
-	cost->ra = 0;
-	cost->rb = 0;
-	cost->rr = 0;
-	cost->rra = 0;
-	cost->rrb = 0;
-	cost->rrr = 0;
-	cost->total = 0;
-	cost->value = 0;
-}
+#include "../includes/push_swap.h"
 
 static void	calculate_combined_rotations(t_cost *cost)
 {
@@ -51,16 +39,13 @@ t_cost	calculate_cost(t_ring *a, t_ring *b, size_t pos_b)
 	t_cost	cost;
 	t_node	*current;
 	size_t	target_pos;
-	size_t	i;
+	int		i;
 
 	init_cost(&cost);
 	current = b->head;
-	i = 0;
-	while (i < pos_b)
-	{
+	i = -1;
+	while (++i < (int)pos_b)
 		current = current->next;
-		i++;
-	}
 	target_pos = (size_t)find_target_position(a, current->value);
 	cost.value = current->value;
 	if (target_pos <= a->size / 2)

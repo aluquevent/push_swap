@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/operations.h"
+#include "../includes/push_swap.h"
 
 int	find_target_position(t_ring *a, int value)
 {
 	t_node	*current;
 	t_node	*min_node;
-	size_t	i;
+	int		i;
 	int		closest_larger_value;
 	int		closest_larger_pos;
 
@@ -25,8 +25,8 @@ int	find_target_position(t_ring *a, int value)
 	current = a->head;
 	closest_larger_value = INT_MAX;
 	closest_larger_pos = -1;
-	i = 0;
-	while (i < a->size)
+	i = -1;
+	while (++i < (int)a->size)
 	{
 		if (current->value > value && current->value < closest_larger_value)
 		{
@@ -34,7 +34,6 @@ int	find_target_position(t_ring *a, int value)
 			closest_larger_pos = i;
 		}
 		current = current->next;
-		i++;
 	}
 	if (closest_larger_pos != -1)
 		return (closest_larger_pos);

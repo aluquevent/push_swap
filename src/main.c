@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/operations.h"
+#include "../includes/push_swap.h"
 
 static int	check_arguments(int argc, char **argv, size_t *elements, int **nums)
 {
@@ -28,53 +28,37 @@ static int	check_arguments(int argc, char **argv, size_t *elements, int **nums)
 	return (1);
 }
 
-static int	init_stacks(t_ring **stack_a, t_ring **stack_b, int *nums, size_t elements)
+static void	print_stack(t_ring *ring, char stack_name)
 {
-	*stack_a = init_ring_a(nums, elements);
-	*stack_b = init_ring();
-	if (!*stack_a || !*stack_b)
+	t_node	*current;
+	size_t	i;
+
+	if (!ring || ring->size == 0)
 	{
-		if (*stack_a)
-			free_ring(*stack_a);
-		if (*stack_b)
-			free_ring(*stack_b);
-		ft_printf("Error: Memory allocation failed\n");
-		return (0);
+		ft_printf("Stack %c: [empty]\n", stack_name);
+		return ;
 	}
-	return (1);
+	ft_printf("Stack %c: [", stack_name);
+	current = ring->head;
+	i = 0;
+	while (i < ring->size)
+	{
+		ft_printf("%d", current->value);
+		if (i < ring->size - 1)
+			ft_printf(", ");
+		current = current->next;
+		i++;
+	}
+	ft_printf("] (size: %d)\n", ring->size);
 }
 
-// static void	print_stack(t_ring *ring, char stack_name)
-// {
-// 	t_node	*current;
-// 	size_t	i;
-//
-// 	if (!ring || ring->size == 0)
-// 	{
-// 		ft_printf("Stack %c: [empty]\n", stack_name);
-// 		return ;
-// 	}
-// 	ft_printf("Stack %c: [", stack_name);
-// 	current = ring->head;
-// 	i = 0;
-// 	while (i < ring->size)
-// 	{
-// 		ft_printf("%d", current->value);
-// 		if (i < ring->size - 1)
-// 			ft_printf(", ");
-// 		current = current->next;
-// 		i++;
-// 	}
-// 	ft_printf("] (size: %d)\n", ring->size);
-// }
+static void	print_states(t_ring *stack_a, t_ring *stack_b, char *message)
+{
+	ft_printf("%s\n", message);
+	print_stack(stack_a, 'a');
+	print_stack(stack_b, 'b');
+}
 
-// static void	print_states(t_ring *stack_a, t_ring *stack_b, char *message)
-// {
-// 	ft_printf("%s\n", message);
-// 	print_stack(stack_a, 'a');
-// 	print_stack(stack_b, 'b');
-// }
-//
 static void	clean_resources(int *nums, t_ring *stack_a, t_ring *stack_b)
 {
 	free(nums);
@@ -97,14 +81,14 @@ int	main(int argc, char **argv)
 		free(nums);
 		return (1);
 	}
-	// print_states(stack_a, stack_b, "\nInitial state: \n");
+	print_states(stack_a, stack_b, "\nInitial state: \n");
 
 	if (is_sorted(stack_a))
 		ft_printf("Stack is already sorted\n");
 	else
 		sort_stack(stack_a, stack_b);
-	// print_ops_summary();
-	// print_states(stack_a, stack_b, "\nFinal state: \n");
+	print_ops_summary();
+	print_states(stack_a, stack_b, "\nFinal state: \n");
 	clean_resources(nums, stack_a, stack_b);
 	return (0);
 }
