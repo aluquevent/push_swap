@@ -12,12 +12,29 @@
 
 #include "../includes/push_swap.h"
 
+/**
+ * Sorts a ring containing exactly 2 elements.
+ * 
+ * This function checks if the 2 elements are out of order and swaps them
+ * if necessary, using a single operation.
+ *
+ * @param a Pointer to the ring structure
+ */
 void	sort_two(t_ring *a)
 {
 	if (a->head->value > a->head->next->value)
 		do_sa(a);
 }
 
+/**
+ * Sorts a ring containing exactly 3 elements.
+ * 
+ * This function implements an optimized algorithm for sorting 3 elements
+ * using the minimum number of operations. It analyzes the current arrangement
+ * and applies the appropriate sequence of operations.
+ *
+ * @param a Pointer to the ring structure
+ */
 void	sort_three(t_ring *a)
 {
 	int	first;
@@ -45,6 +62,16 @@ void	sort_three(t_ring *a)
 		do_rra(a);
 }
 
+/**
+ * Main sorting function that selects the appropriate algorithm.
+ * 
+ * This function initializes the operation counter and then selects and applies
+ * the most appropriate sorting algorithm based on the number of elements in
+ * the stack.
+ *
+ * @param a Pointer to the primary ring structure
+ * @param b Pointer to the auxiliary ring structure
+ */
 void	sort_stack(t_ring *a, t_ring *b)
 {
 	if (!a || !b)

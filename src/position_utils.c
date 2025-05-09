@@ -12,6 +12,19 @@
 
 #include "../includes/push_swap.h"
 
+/**
+ * Finds the target position in ring a for a value from ring b.
+ * 
+ * This function determines where in ring a a value from ring b should be
+ * placed to maintain sorted order. It looks for the closest larger value in
+ * ring a, or if the value is the largest, it targets the position after the
+ * minimum value.
+ *
+ * @param a Pointer to the destination ring structure
+ * @param value The value from ring b to find a position for
+ *
+ * @return The optimal position in ring a for the specified value
+ */
 int	find_target_position(t_ring *a, int value)
 {
 	t_node	*current;
@@ -41,6 +54,15 @@ int	find_target_position(t_ring *a, int value)
 	return (get_position(a, min_node));
 }
 
+/**
+ * Performs the final rotation to ensure the minimum value is at the top.
+ * 
+ * After all elements have been sorted and moved to ring a, this function
+ * rotates the ring so that the smallest element is at the head position,
+ * completing the sort in ascending order.
+ *
+ * @param a Pointer to the ring structure to be adjusted
+ */
 void	final_rotation(t_ring *a)
 {
 	t_node	*min_node;

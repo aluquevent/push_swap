@@ -14,6 +14,36 @@
 
 t_ops	g_ops;
 
+/**
+ * Initializes the global operations counter.
+ * 
+ * This function resets all operation counters in the global operations
+ * structure to zero. This should be called at the beginning of the sorting
+ * process to ensure accurate operation counting.
+ */
+void	init_ops_counter(void)
+{
+	g_ops.sa = 0;
+	g_ops.sb = 0;
+	g_ops.ss = 0;
+	g_ops.pa = 0;
+	g_ops.pb = 0;
+	g_ops.ra = 0;
+	g_ops.rb = 0;
+	g_ops.rr = 0;
+	g_ops.rra = 0;
+	g_ops.rrb = 0;
+	g_ops.rrr = 0;
+	g_ops.total = 0;
+}
+
+/**
+ * Prints a summary of all operations performed during sorting.
+ * 
+ * This function calculates the total number of operations and prints a
+ * detailed breakdown of each operation type. This is useful for analyzing
+ * the efficiency of the sorting algorithm.
+ */
 void	print_ops_summary(void)
 {
 	g_ops.total = g_ops.sa + g_ops.sb + g_ops.ss + g_ops.pa + g_ops.pb

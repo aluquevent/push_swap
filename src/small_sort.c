@@ -12,6 +12,16 @@
 
 #include "../includes/push_swap.h"
 
+/**
+ * Rotates a ring until the specified position is at the top.
+ * 
+ * This function determines whether to use rotate or reverse rotate operations
+ * based on which would require fewer operations to bring the target position
+ * to the head of the ring.
+ *
+ * @param a Pointer to the ring structure
+ * @param pos The target position to bring to the top
+ */
 void	rotate_to_pos(t_ring *a, int pos)
 {
 	int	size;
@@ -38,7 +48,16 @@ void	rotate_to_pos(t_ring *a, int pos)
 	}
 }
 
-// Push inicial optimizado - envía números a B parcialmente ordenados
+/**
+ * Optimized sorting algorithm for exactly 4 elements.
+ * 
+ * This function implements a specialized approach for sorting 4 elements:
+ * it moves the minimum value to ring b, sorts the remaining 3 elements, and
+ * then brings back the minimum to the top of ring a.
+ *
+ * @param a Pointer to the primary ring structure
+ * @param b Pointer to the auxiliary ring structure
+ */
 static void	optimize_four(t_ring *a, t_ring *b)
 {
 	t_node	*min_node;
@@ -52,6 +71,16 @@ static void	optimize_four(t_ring *a, t_ring *b)
 	do_pa(b, a);
 }
 
+/**
+ * Optimized sorting algorithm for exactly 5 elements.
+ * 
+ * This function implements a specialized approach for sorting 5 elements:
+ * it moves the two minimum values to ring b, sorts the remaining 3 elements,
+ * and then brings back the minimum values to the top of ring a.
+ *
+ * @param a Pointer to the primary ring structure
+ * @param b Pointer to the auxiliary ring structure
+ */
 static void	optimize_five(t_ring *a, t_ring *b)
 {
 	t_node	*min_node;
@@ -70,7 +99,16 @@ static void	optimize_five(t_ring *a, t_ring *b)
 	do_pa(b, a);
 }
 
-// Optimizar el ordenamiento para casos especiales
+/**
+ * Selects and applies the appropriate small sorting algorithm.
+ * 
+ * This function determines the best sorting approach based on the number of
+ * elements in ring a, choosing between specialized algorithms for 4 or 5
+ * elements.
+ *
+ * @param a Pointer to the primary ring structure
+ * @param b Pointer to the auxiliary ring structure
+ */
 void	optimize_small_sort(t_ring *a, t_ring *b)
 {
 	if (a->size == 4)

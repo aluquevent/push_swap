@@ -15,12 +15,13 @@
 
 # include "../libft/includes/ft_printf.h"
 # include "../libft/includes/libft.h"
+# include "../libft/includes/get_next_line.h"
 
 # include "list.h"
 # include "operations.h"
 # include "sorting.h"
 
-int	init_stacks(t_ring **stack_a, t_ring **stack_b, int *nums, size_t elements);
-int	*process_numbers(char **data, size_t *elements);
+int		init_stacks(t_ring **stack_a, t_ring **stack_b, int *nums, size_t elements);
+int		*process_numbers(char **data, size_t *elements);
 
 #endif

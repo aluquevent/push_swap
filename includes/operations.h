@@ -6,7 +6,7 @@
 /*   By: aluque-v <aluque-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:32:31 by aluque-v          #+#    #+#             */
-/*   Updated: 2025/05/04 15:58:57 by aluque-v         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:39:13 by aluque-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_cost
 	int					rrr;
 	int					total;
 	int					value;
-} t_cost;
+}	t_cost;
 
 typedef struct s_ops
 {
@@ -43,7 +43,7 @@ typedef struct s_ops
 	int			rrb;
 	int			rrr;
 	int			total;
-} t_ops;
+}	t_ops;
 
 extern t_ops	g_ops;
 

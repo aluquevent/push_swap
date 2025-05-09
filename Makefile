@@ -14,7 +14,8 @@ SRC_FILES =	best_move.c		cost.c \
 			push_initial.c	main.c \
 			small_sort.c	sort.c \
 			turkish_sort.c	validation.c \
-			init.c			validation_utils.c
+			init.c			validation_utils.c \
+			operations_do_rotate_both.c
 
 # Add complete route
 SRC_WITH_PATH = $(addprefix $(SRC_DIR)/,$(SRC_FILES))
@@ -30,6 +31,19 @@ HEADERS =	includes/operations.h	includes/push_swap.h \
 
 #Executable name
 EXEC = push_swap
+
+#Bonus files
+BONUS_OBJ = \
+			obj/checker_bonus.o \
+			obj/validation.o \
+			obj/validation_utils.o \
+			obj/operations_core.o \
+			obj/list_utils.o \
+			obj/init.o \
+			obj/list_struct.o \
+			obj/list_free.o
+
+CHECKER = checker
 
 #Main Rule
 all: directories libft_make $(EXEC)
@@ -53,6 +67,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) Makefile
 	@$(CC) $(CFLAGS) -MD -c $< -o $@
 	@echo "🔧 Compiling $@..."
 
+bonus: all $(BONUS_OBJ) $(LIBFT)
+	@echo "⭐ Compiling bonus Checker..."
+	@$(CC) $(CFLAGS) -o $(CHECKER) $(BONUS_OBJ) $(LIBFT)
 #Clean generated files
 clean:
 	@echo "🧹 Cleaning libft and push_swap object files..."
@@ -61,12 +78,13 @@ clean:
 
 fclean: clean
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR) fclean
-	@rm $(EXEC)
+	@rm -f $(EXEC)
+	@rm -f $(CHECKER)
 
 re: fclean all
-	@echo "🛠 Rebuilding push_swap project..."
+	@echo "🤖 Push_swap project rebuilt !!!"
 
-.PHONY: all clean fclean re directories libft_make
+.PHONY: all clean fclean re directories libft_make bonus
 
 #Include generated dependency files
 -include $(DEP_FILES)

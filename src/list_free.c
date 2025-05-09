@@ -12,6 +12,15 @@
 
 #include "../includes/push_swap.h"
 
+/**
+ * Frees all memory associated with a ring structure.
+ * 
+ * This function releases the memory for all nodes in the ring as well as the
+ * ring structure itself. It correctly handles the circular nature of the list
+ * to ensure all nodes are freed exactly once.
+ * 
+ * @param ring Pointer to the ring structure to be freed
+ */
 void	free_ring(t_ring *ring)
 {
 	t_node	*current;

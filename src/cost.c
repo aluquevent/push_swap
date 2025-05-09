@@ -12,6 +12,15 @@
 
 #include "../includes/push_swap.h"
 
+/**
+ * Optimizes rotation operations by calculating combined moves.
+ * 
+ * This function identifies opportunities for performing combined rotations (rr)
+ * and reverse rotations (rrr) to reduce the total number of operations. It 
+ * updates the cost structure with optimized operation counts.
+ * 
+ * @param cost Pointer to the cost structure to be optimized
+ */
 static void	calculate_combined_rotations(t_cost *cost)
 {
 	if (cost->ra <= cost->rb)
@@ -34,6 +43,22 @@ static void	calculate_combined_rotations(t_cost *cost)
 	}
 }
 
+/**
+ * Calculates the cost of moving an element from ring b to its target position
+ * in ring a.
+ * 
+ * This function computes the number of operations needed to position both rings
+ * correctly for transferring the element at the specified position in ring b
+ * to its target position in ring a. It optimizes by using combined rotations
+ * where possible.
+ * 
+ * @param a Pointer to the destination ring structure
+ * @param b Pointer to the source ring structure
+ * @param pos_b The position in ring b of the element to be moved
+ * 
+ * @return t_cost The cost structure containing all operation counts and the
+ *         total cost
+ */
 t_cost	calculate_cost(t_ring *a, t_ring *b, size_t pos_b)
 {
 	t_cost	cost;

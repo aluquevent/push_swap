@@ -12,6 +12,15 @@
 
 #include "../includes/push_swap.h"
 
+/**
+ * Swaps the top two elements of a ring.
+ * 
+ * This function exchanges the positions of the first and second elements in
+ * the ring, updating all necessary pointers to maintain the circular structure.
+ * No action is taken if the ring has fewer than 2 elements.
+ *
+ * @param ring Pointer to the ring structure
+ */
 void	swap(t_ring *ring)
 {
 	t_node	*top_node;
@@ -34,12 +43,31 @@ void	swap(t_ring *ring)
 	ring->head = second_node;
 }
 
+/**
+ * Swaps the top elements of both rings simultaneously.
+ * 
+ * This function performs the swap operation on both rings a and b in a single
+ * step, which counts as a single operation in the algorithm.
+ *
+ * @param a Pointer to the first ring structure
+ * @param b Pointer to the second ring structure
+ */
 void	ss(t_ring *a, t_ring *b)
 {
 	swap(a);
 	swap(b);
 }
 
+/**
+ * Moves the top element from one ring to the top of another ring.
+ * 
+ * This function removes the head node from the origin ring and adds it to
+ * the front of the destination ring. No action is taken if the origin ring
+ * is empty.
+ *
+ * @param origin Pointer to the source ring structure
+ * @param dest Pointer to the destination ring structure
+ */
 void	push(t_ring *origin, t_ring *dest)
 {
 	t_node	*node_to_push;
@@ -51,6 +79,18 @@ void	push(t_ring *origin, t_ring *dest)
 	add_front(dest, node_to_push);
 }
 
+/**
+ * Rotates the elements of a ring.
+ * 
+ * This function shifts all elements in the ring by one position. If reverse
+ * is false, the first element becomes the last. If reverse is true, the last
+ * element becomes the first. No action is taken if the ring has fewer than 2
+ * elements.
+ *
+ * @param ring Pointer to the ring structure
+ * @param reverse Boolean flag indicating direction (false for ra/rb, true for
+ *                rra/rrb)
+ */
 void	rotate(t_ring *ring, bool reverse)
 {
 	if (!reverse)
@@ -67,6 +107,17 @@ void	rotate(t_ring *ring, bool reverse)
 	}
 }
 
+/**
+ * Rotates both rings simultaneously in the same direction.
+ * 
+ * This function performs rotation on both rings a and b in a single step,
+ * which counts as a single operation in the algorithm. The direction is
+ * determined by the reverse parameter.
+ *
+ * @param a Pointer to the first ring structure
+ * @param b Pointer to the second ring structure
+ * @param reverse Boolean flag indicating direction (false for rr, true for rrr)
+ */
 void	rr(t_ring *a, t_ring *b, bool reverse)
 {
 	if (!reverse)

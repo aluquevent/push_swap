@@ -1,5 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aluque-v <aluque-v@student.42barcelona.co  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/09 15:40:59 by aluque-v          #+#    #+#             */
+/*   Updated: 2025/05/09 15:41:07 by aluque-v         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
+/**
+ * Initializes an empty ring structure.
+ * 
+ * This function allocates memory for a new ring structure and initializes its
+ * members. The head pointer is set to NULL and size to 0.
+ * 
+ * @return Pointer to the newly allocated and initialized ring structure, or
+ *         NULL if memory allocation fails
+ */
 t_ring	*init_ring(void)
 {
 	t_ring	*ring;
@@ -12,6 +33,19 @@ t_ring	*init_ring(void)
 	return (ring);
 }
 
+/**
+ * Initializes ring a with the provided array of numbers.
+ * 
+ * This function creates a new ring structure and populates it with nodes
+ * containing the values from the provided array. Each value is added to the
+ * back of the ring.
+ * 
+ * @param nums Array of integers to populate the ring with
+ * @param elements Number of elements in the array
+ * 
+ * @return Pointer to the newly created and populated ring structure, or
+ *         NULL if memory allocation fails
+ */
 t_ring	*init_ring_a(int *nums, size_t elements)
 {
 	t_ring	*a;
@@ -36,6 +70,14 @@ t_ring	*init_ring_a(int *nums, size_t elements)
 	return (a);
 }
 
+/**
+ * Initializes a cost structure with zero values.
+ * 
+ * This function sets all operation counters in the cost structure to zero,
+ * preparing it for cost calculation.
+ * 
+ * @param cost Pointer to the cost structure to be initialized
+ */
 void	init_cost(t_cost *cost)
 {
 	cost->ra = 0;
@@ -48,22 +90,20 @@ void	init_cost(t_cost *cost)
 	cost->value = 0;
 }
 
-void	init_ops_counter(void)
-{
-	g_ops.sa = 0;
-	g_ops.sb = 0;
-	g_ops.ss = 0;
-	g_ops.pa = 0;
-	g_ops.pb = 0;
-	g_ops.ra = 0;
-	g_ops.rb = 0;
-	g_ops.rr = 0;
-	g_ops.rra = 0;
-	g_ops.rrb = 0;
-	g_ops.rrr = 0;
-	g_ops.total = 0;
-}
-
+/**
+ * Initializes both stack a and stack b for the sorting algorithm.
+ * 
+ * This function creates and initializes both stacks needed for the algorithm.
+ * Stack a is populated with the input numbers, while stack b is initialized
+ * as empty. If any allocation fails, it performs cleanup and returns an error.
+ * 
+ * @param stack_a Pointer to where the stack a pointer should be stored
+ * @param stack_b Pointer to where the stack b pointer should be stored
+ * @param nums Array of integers to populate stack a with
+ * @param elements Number of elements in the array
+ * 
+ * @return 1 on success, 0 on failure
+ */
 int	init_stacks(t_ring **stack_a, t_ring **stack_b, int *nums, size_t elements)
 {
 	*stack_a = init_ring_a(nums, elements);
@@ -79,4 +119,3 @@ int	init_stacks(t_ring **stack_a, t_ring **stack_b, int *nums, size_t elements)
 	}
 	return (1);
 }
-

@@ -12,8 +12,18 @@
 
 #include "../includes/push_swap.h"
 
-// Esta función determina si un número 
-// es de la mitad superior o inferior del rango
+/**
+ * Determines if a value is in the upper half of the value range in ring a.
+ * 
+ * This function calculates the median value in ring a and checks if the
+ * given value is above this median. This is used for efficient chunking
+ * during the initial push phase.
+ *
+ * @param a Pointer to the ring structure
+ * @param value The value to check
+ *
+ * @return 1 if the value is in the upper half, 0 otherwise
+ */
 static int	is_in_upper_half(t_ring *a, int value)
 {
 	t_node	*min_node;
@@ -32,6 +42,17 @@ static int	is_in_upper_half(t_ring *a, int value)
 	return (0);
 }
 
+/**
+ * Finds the position in ring a that requires the minimum cost to access.
+ * 
+ * This function calculates the cost (number of operations) required to bring
+ * each position to the top of ring a, and returns the position with the 
+ * minimum cost.
+ *
+ * @param a Pointer to the ring structure
+ *
+ * @return The position that requires the minimum number of operations to reach
+ */
 static int	find_best_push_pos(t_ring *a)
 {
 	size_t	i;
@@ -61,6 +82,17 @@ static int	find_best_push_pos(t_ring *a)
 	return (best_pos);
 }
 
+/**
+ * Pushes elements from ring a to ring b in chunks.
+ * 
+ * This function implements a chunking strategy where approximately half of the
+ * elements (primarily those in the lower half of the value range) are pushed
+ * to ring b. This creates a rough partition that helps optimize the sorting.
+ *
+ * @param a Pointer to the source ring structure
+ * @param b Pointer to the destination ring structure
+ * @param to_push The total number of elements that should be pushed
+ */
 static void	push_to_chunks(t_ring *a, t_ring *b, int to_push)
 {
 	int	pushed;
@@ -85,6 +117,15 @@ static void	push_to_chunks(t_ring *a, t_ring *b, int to_push)
 	}
 }
 
+/**
+ * Pushes the remaining elements from ring a to ring b efficiently.
+ * 
+ * After the initial chunking, this function pushes the remaining elements
+ * (except for 3) to ring b, selecting positions that minimize rotation costs.
+ *
+ * @param a Pointer to the source ring structure
+ * @param b Pointer to the destination ring structure
+ */
 static void	push_remaining(t_ring *a, t_ring *b)
 {
 	int	best_pos;
@@ -97,6 +138,16 @@ static void	push_remaining(t_ring *a, t_ring *b)
 	}
 }
 
+/**
+ * Optimizes the initial push phase of the sorting algorithm.
+ * 
+ * This function implements a strategy for efficiently pushing elements from
+ * ring a to ring b, leaving only the 3 elements in ring a. It uses different
+ * approaches based on the total number of elements.
+ *
+ * @param a Pointer to the source ring structure
+ * @param b Pointer to the destination ring structure
+ */
 void	optimized_push_initial(t_ring *a, t_ring *b)
 {
 	int	elements_to_push;
