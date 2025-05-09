@@ -12,20 +12,30 @@
 
 #include "../includes/push_swap.h"
 
+/**
+ * Finds the optimal move with minimal cost by evaluating all positions in ring b.
+ * 
+ * This function iterates through each position in ring b and calculates the
+ * associated cost of moving that element to its correct position in ring a.
+ * It returns the move with the lowest total cost.
+ * 
+ * @param a Pointer to the destination ring structure
+ * @param b Pointer to the source ring structure containing elements to be moved
+ * 
+ * @return t_cost The move with the minimum total cost, containing:
+ *         - total: The combined cost of all operations
+ *         - ra, rb, rr: Counts for rotate operations
+ *         - rra, rrb, rrr: Counts for reverse rotate operations
+ *         - value: The value being moved (initialized to 0)
+**/
 t_cost	find_best_move(t_ring *a, t_ring *b)
 {
 	t_cost	min_cost;
 	t_cost	current_cost;
 	size_t	i;
 
+	init_cost(&min_cost);
 	min_cost.total = INT_MAX;
-	min_cost.ra = 0;
-	min_cost.rb = 0;
-	min_cost.rr = 0;
-	min_cost.rra = 0;
-	min_cost.rrb = 0;
-	min_cost.rrr = 0;
-	min_cost.value = 0;
 	i = 0;
 	while (i < b->size)
 	{
